@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/main/index",
+    "pages/user/home/index",
+    "pages/user/income/index",
+    "pages/pay/goods/index"
+  ],
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#0faeff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tar/home.png",
+        "selectedIconPath": "images/tar/home_HL.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/main/index",
+        "iconPath": "images/tar/user.png",
+        "selectedIconPath": "images/tar/user_HL.png",
+        "text": "main"
+      },
+      {
+        "pagePath": "pages/user/home/index",
+        "iconPath": "images/tar/user.png",
+        "selectedIconPath": "images/tar/user_HL.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "首页",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

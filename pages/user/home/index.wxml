@@ -1,0 +1,48 @@
+<scroll-view scroll-y class="page">
+  <view class="modal-box" wx:if="{{!hasUserInfo && canIUse}}" bindtap="hide">
+    <view class="modal-body">
+      <view class="modal-content">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="width:100%;" class='cu-btn round bg-gradual-blue shadow'>登录富贵儿打卡</button>
+      </view>
+    </view>
+  </view>
+  <view class="user-section bg-cyan light">
+    <view class="user-info-box align-center text-center" style="padding-top: 60px;">
+      <view class="cu-avatar xl round align-center" style="background-image:url({{userInfo.avatarUrl}});margin: auto; width: 80px; height: 80px;"></view>
+    </view>
+    <view class="user-info-box align-center text-center" style="padding-top: 8px;">
+      <text class="text-grey" style="margin: auto;font-size: large;">
+      {{userInfo.nickName}}
+      </text>
+    </view>
+    <view class="user-info-box align-center text-center" style="padding-top: 8px;">
+      <text class="text-grey" style="margin: auto;font-size: large;">富贵儿码：22229</text>
+    </view>
+  </view>
+
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <view class="cu-item">
+      <view>
+        <text class="cuIcon-choiceness text-green"></text>
+        <text class="text-grey">当前拥有富贵儿豆：</text>
+      </view>
+      <view class="action">
+        <text class="text-grey">8880（个）</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list menu sm-border card-menu margin-top">
+    <navigator class="cu-item arrow" url="/pages/user/income/index">
+      <view class="cu-item arrow">
+        <text class="cuIcon-refund text-orange"></text>
+        <text class="text-grey" style="padding-left: 5px;">收益明细</text>
+      </view>
+    </navigator>
+    <navigator class="cu-item arrow" url="/pages/pay/goods/index">
+      <view class="cu-item arrow">
+        <text class="cuIcon-cart text-orange"></text>
+        <text class="text-grey" style="padding-left: 5px;">商品兑换</text>
+      </view>
+    </navigator>
+  </view>
+</scroll-view>
