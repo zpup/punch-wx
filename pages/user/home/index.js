@@ -1,4 +1,7 @@
 // pages/user/home/index.js
+
+var common = require("../../../js/common.js");
+
 const app = getApp()
 Page({
 
@@ -6,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    beans:0,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -17,6 +21,7 @@ Page({
   onLoad: function (options) {
     if (app.globalData.userInfo) {
       this.setData({
+        beans:app.globalData.beans,
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
@@ -25,6 +30,7 @@ Page({
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
+          beans: app.globalData.beans,
           userInfo: res.userInfo,
           hasUserInfo: true
         })
@@ -35,11 +41,13 @@ Page({
         success: res => {
           app.globalData.userInfo = res.userInfo
           this.setData({
+            beans: app.globalData.beans,
             userInfo: res.userInfo,
             hasUserInfo: true
           })
         }
       })
+      common.setBusUserInfo()
     }
   },
 

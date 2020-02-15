@@ -1,10 +1,10 @@
-  <view class="modal-box" wx:if="{{!hasUserInfo && canIUse}}" bindtap="hide">
-    <view class="modal-body">
-        <view class="modal-content">
+<view class="modal-box" wx:if="{{!hasUserInfo && canIUse}}" bindtap="hide">
+  <view class="modal-body">
+    <view class="modal-content">
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="width:100%;" class='cu-btn round bg-gradual-blue shadow'>登录富贵儿打卡</button>
-      </view>
     </view>
   </view>
+</view>
 <image src="/images/main/main-1.png" mode="widthFix" class="response cu-tabbar-height"></image>
 
 <uni-notice-bar style="background-color: #F0F0F0;" show-icon="true" scrollable="true" single="true" text="欢迎打卡随机收益[5-100]富贵儿豆，连续打卡收益有惊喜！！！" />
@@ -22,7 +22,7 @@
     <view class="text-left">
       <text class="cuIcon-title text-blue text-left"></text>今日已打卡
     </view>
-    <view class="text-right">今日打卡数：320</view>
+    <view class="text-right">今日打卡数：{{punchNum}}</view>
   </view>
   <view class="">
     <view class="grid solid-bottom text-center col-3 bg-gradual-blue" style="padding-top: 12px;padding-bottom: 12px;">
@@ -30,10 +30,10 @@
       <view>时间</view>
       <view>收益</view>
     </view>
-    <view class="grid solid-bottom text-center  col-3 light" style="padding-top: 8px;padding-bottom: 8px;" wx:for="{{elements}}" wx:key="key">
-      <view class="text-center " style="color: #808080;">{{item.title}}</view>
-      <view class="text-center " style="color: #808080;">{{item.name}}</view>
-      <view class="text-center " style="color: #808080;">{{item.color}}</view>
+    <view class="grid solid-bottom text-center  col-3 light" style="padding-top: 8px;padding-bottom: 8px;" wx:for="{{punchList}}" wx:key="key">
+      <view class="text-center " style="color: #808080;">{{item.userId}}</view>
+      <view class="text-center " style="color: #808080;">{{item.showTime}}</view>
+      <view class="text-center " style="color: #808080;">{{item.profit}}</view>
     </view>
   </view>
 </view>

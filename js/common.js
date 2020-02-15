@@ -1,29 +1,22 @@
 const app = getApp()
 
 //更新用户信息，是否分享用户
-function setBusUserInfo(e) {
+function setBusUserInfo(result) {
   var that = this;
   wx.request({
     url: app.globalData.apiurl + '/api/user/setWchatUser',
     method: 'POST',
     data: {
-      'busUserInfo': JSON.parse(that.globalData.busUserInfo),
-      'userInfo': JSON.parse(that.globalData.userInfo),
-      'shareUserId': that.globalData.shareUserId,
+      'busUserInfo': JSON.stringify(app.globalData.busUserInfo),
+      'userInfo': JSON.stringify(app.globalData.userInfo),
+      'shareUserId': app.globalData.shareUserId,
     },
     success: function (res) {
       var d = res.data.data;
       console.log(d);
-      result(d);
+      app.globalData.busUserInfo = d.busUser
+      app.globalData.beans = d.beans
 
-      // wx.redirectTo({
-      //   url:'/pages/member/address'
-      // })
-      that.setData({
-        kdUserInfo: res.data.data,
-
-      })
-      app.globalData.kdUserInfo = res.data.data
     }
   })
 }

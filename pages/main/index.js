@@ -12,67 +12,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    elements: [{
-        title: '11202',
-        name: '1秒前',
-        color: '20',
-        cuIcon: 'newsfill'
-      },
-      {
-        title: '11202',
-        name: '23秒前',
-        color: '20',
-        cuIcon: 'colorlens'
-      },
-      {
-        title: '11202',
-        name: '23秒前',
-        color: '20',
-        cuIcon: 'font'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'cuIcon'
-      },
-      {
-        title: '11202',
-        name: '23秒前',
-        color: '20',
-        cuIcon: 'btn'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'tagfill'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'myfill'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'icloading'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'copy'
-      },
-      {
-        title: '11202',
-        name: '20-01-01 99:21',
-        color: '20',
-        cuIcon: 'loading2'
-      }
-    ],
+    punchNum: 400,
+    punchList: [],
   },
 
   /**
@@ -86,7 +27,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      common.setBusUserInfo()
+
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -95,6 +36,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -105,9 +47,12 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
+
         }
       })
+
     }
+    common.setBusUserInfo()
   },
 
   /**
@@ -121,7 +66,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this;
+    wx.request({
+      url: app.globalData.apiurl + '/api/punch/getPunchInfo',
+      method: 'POST',
+      data: {},
+      success: function(res) {
+        var d = res.data.data;
+        that.setData({
+          punchList: JSON.parse(d.punchList),
+          punchNum: d.punchNum,
+        })
+        console.log("init punch info")
+      }
+    })
   },
 
   /**
@@ -142,7 +100,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    var that = this;
+    wx.request({
+      url: app.globalData.apiurl + '/api/punch/getPunchInfo',
+      method: 'POST',
+      data: {},
+      success: function (res) {
+        var d = res.data.data;
+        that.setData({
+          punchList: JSON.parse(d.punchList),
+          punchNum: d.punchNum,
+        })
+        console.log("init punch info")
+      }
+    })
   },
 
   /**
@@ -169,5 +140,4 @@ Page({
       hasUserInfo: true
     })
   }
-
 })
