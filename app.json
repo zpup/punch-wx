@@ -19,12 +19,6 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/main/index",
-        "iconPath": "images/tar/user.png",
-        "selectedIconPath": "images/tar/user_HL.png",
-        "text": "main"
-      },
-      {
         "pagePath": "pages/user/home/index",
         "iconPath": "images/tar/user.png",
         "selectedIconPath": "images/tar/user_HL.png",

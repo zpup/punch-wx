@@ -4,7 +4,7 @@
     <view slot="content">商品兑换</view>
   </cu-custom>
   <view class="grid margin-bottom text-center col-2">
-    <view class="cu-card case " bindtap="showModal" data-target="DialogModal1" wx:for="{{exchangeInfo}}" :key>
+    <view class="cu-card case " bindtap="showModal" data-target="DialogModal1" wx:for="{{exchangeInfo}}" wx:key='key'>
       <view class="cu-item shadow">
         <view class="image">
           <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4144423139,3097306607&fm=26&gp=0.jpg" mode="widthFix"></image>

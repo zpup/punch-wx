@@ -74,7 +74,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    var that = this
+    return {
+      title: '签到记得礼金，拉新即得惊喜！',
+      path: '/pages/index/index?id=' + app.globalData.busUserInfo.id
+    }
   },
   showModal(e) {
     this.modalName = e.currentTarget.dataset.target

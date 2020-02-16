@@ -14,14 +14,18 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     punchNum: 400,
     punchList: [],
+    loadModal: false,
+    showBeans: false,
+    beans: 0,
+    showMsg: "签到不易，且行且珍惜~~",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
-    console.log(app.globalData.userInfo);
+    
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -100,6 +104,35 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    this.onloadPunchInfo()
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    var that = this
+    return {
+      title: '签到记得礼金，拉新即得惊喜！',
+      path: '/pages/index/index?id=' + app.globalData.busUserInfo.id
+    }
+  },
+  getUserInfo: function(e) {
+    console.log(4)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+  onloadPunchInfo: function(e){
     var that = this;
     wx.request({
       url: app.globalData.apiurl + '/api/punch/getPunchInfo',
@@ -115,29 +148,46 @@ Page({
       }
     })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-    return {
-      title: '邀请好友得福利币',
-      path: '/pages/main/index?id=123'
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(4)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  punch: function(e) {
+    var that = this
+    that.setData({
+      loadModal: true
     })
-  }
+    wx.request({
+      url: app.globalData.apiurl + '/api/punch/punch',
+      method: 'POST',
+      data: {
+        'busUserInfo': JSON.stringify(app.globalData.busUserInfo),
+      },
+      success: function(res) {
+        console.log(res)
+        if (res.data.code == 0) {
+          var d = res.data.data;
+          that.setData({
+            beans: d.beans,
+            showMsg: d.showMsg,
+          })
+        } else {
+          that.setData({
+            showMsg: res.data.msg,
+          })
+        }
+        that.onloadPunchInfo()
+      },
+      error: function(res) {
+
+      }
+    })
+    setTimeout(() => {
+      this.setData({
+        loadModal: false,
+        showBeans: true
+      })
+    }, 6000)
+  },
+  hideModal(e) {
+    this.setData({
+      showBeans: false,
+    })
+  },
 })

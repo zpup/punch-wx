@@ -41,6 +41,9 @@ App({
                 this.userInfoReadyCallback(res)
               }
               console.log("update wxuser");
+              setTimeout(() => {
+                that.setBusUserInfo();
+              }, 1000)
             }
           })
         }
@@ -59,6 +62,7 @@ App({
         }
       }
     })
+    
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -66,10 +70,30 @@ App({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    console.log("update bususer");
+  },
+  setBusUserInfo: function(result) {
+    console.log(1)
+    var that = this;
+    wx.request({
+      url: that.globalData.apiurl + '/api/user/setWchatUser',
+      method: 'POST',
+      data: {
+        'busUserInfo': JSON.stringify(that.globalData.busUserInfo),
+        'userInfo': JSON.stringify(that.globalData.userInfo),
+        'shareUserId': that.globalData.shareUserId,
+      },
+      success: function(res) {
+        var d = res.data.data;
+        console.log(d);
+        that.globalData.busUserInfo = d.busUser
+        that.globalData.beans = d.beans
+
+      }
+    })
   },
   globalData: {
-    beans:0,
+    isUpdateUser:0,
+    beans: 0,
     shareUserId: 0,
     isNewUser: 0,
     apiurl: "http://192.168.0.107",

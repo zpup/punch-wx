@@ -3,39 +3,13 @@
     <view slot="backText">返回</view>
     <view slot="content">收益明细</view>
   </cu-custom>
-  <view class="cu-timeline">
-    <view class="cu-time">今天</view>
-    <view class="cu-item cur ">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>22:22</text> 【签到】收益 +20
-      </view>
-    </view>
-    <view class="cu-time">昨天</view>
-    <view class="cu-item cur ">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>22:22</text> 【兑换】收益 -20000
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>01:30</text> 【签到】收益 +20
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>01:30</text> 【兑换】收益 -20000
-      </view>
-    </view>
-    <view class="cu-time">01-02</view>
-    <view class="cu-item cur">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>22:22</text> 【兑换】收益 -20000
-      </view>
-    </view>
-    <view class="cu-time">一年前</view>
-    <view class="cu-item cur ">
-      <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
-        <text>19-01-01 22:22</text> 【签到】收益 +20
+  <view class="cu-timeline" wx:for='{{beansMap}}' wx:key='key'>
+    <view class="cu-time" wx:for='{{item}}' wx:for-index='itemkey'>{{itemkey}}</view>
+    <view class="cu-timeline" wx:for='{{item}}' wx:for-index='itemkey'>
+      <view class="cu-item cur " wx:for='{{item}}' wx:key='info'>
+        <view class="bg-gradual-blue shadow-blur" style="padding: 15px;">
+          <text>{{item.showTime}}</text>{{item.text}}
+        </view>
       </view>
     </view>
   </view>

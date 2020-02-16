@@ -2,6 +2,7 @@ const app = getApp()
 
 //更新用户信息，是否分享用户
 function setBusUserInfo(result) {
+  console.log(1)
   var that = this;
   wx.request({
     url: app.globalData.apiurl + '/api/user/setWchatUser',
@@ -16,6 +17,8 @@ function setBusUserInfo(result) {
       console.log(d);
       app.globalData.busUserInfo = d.busUser
       app.globalData.beans = d.beans
+      app.globalData.isUpdate = 1
+
 
     }
   })

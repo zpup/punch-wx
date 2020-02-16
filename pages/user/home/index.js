@@ -47,7 +47,6 @@ Page({
           })
         }
       })
-      common.setBusUserInfo()
     }
   },
 
@@ -62,7 +61,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this
+    that.getUserAccount()
+    if (app.globalData.isUpdate == 0) {
+      common.setBusUserInfo()
+    }
   },
 
   /**
@@ -97,7 +100,30 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this
+    return {
+      title: '签到记得礼金，拉新即得惊喜！',
+      path: '/pages/index/index?id=' + app.globalData.busUserInfo.id
+    }
+  },
+  getUserAccount: function(){
+    var that = this;
+    wx.request({
+      url: app.globalData.apiurl + '/api/user/getBeans',
+      method: 'POST',
+      data: {
+        'busUserInfo': JSON.stringify(app.globalData.busUserInfo),
+      },
+      success: function (res) {
+        var d = res.data.data;
+        console.log(d);
+        app.globalData.beans = d
+        that.setData({
+          beans : d
+        })
 
+      }
+    })
   },
   getUserInfo: function (e) {
     console.log(e)
