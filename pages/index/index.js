@@ -18,6 +18,10 @@ Page({
     showBeans: false,
     beans: 0,
     showMsg: "签到不易，且行且珍惜~~",
+    msgList: [
+      {title: "   欢迎大家来到豌豆，新用户即送100豌豆" },
+      {title: "   每日三次签到即多得当天累计收益的随机加成~~~" },
+      {title: "   欢迎点击右上角分享邀请好友，成功即得40豌豆" }],
   },
 
   /**
@@ -67,20 +71,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
-    wx.request({
-      url: app.globalData.apiurl + '/api/punch/getPunchInfo',
-      method: 'POST',
-      data: {},
-      success: function(res) {
-        var d = res.data.data;
-        that.setData({
-          punchList: JSON.parse(d.punchList),
-          punchNum: d.punchNum,
-        })
-        console.log("init punch info")
-      }
-    })
+    var that = this
+    that.onloadPunchInfo()
     if (app.globalData.isUpdate == 0) {
       common.setBusUserInfo()
     }
@@ -150,41 +142,60 @@ Page({
   },
   punch: function(e) {
     var that = this
-    that.setData({
-      loadModal: true
-    })
-    wx.request({
-      url: app.globalData.apiurl + '/api/punch/punch',
-      method: 'POST',
-      data: {
-        'busUserInfo': JSON.stringify(app.globalData.busUserInfo),
-      },
-      success: function(res) {
-        if (res.data.code == 0) {
-          var d = res.data.data;
+    
+    const promise = new Promise((resolve, reject) => {
+      wx.requestSubscribeMessage({
+        tmplIds: ['UdItdjEvWKvXdxm4xYf6BXo-t-mxIQDusBm4glLbSiM'],
+        success: function (res) {
+          console.log(res);
+          resolve(res)
+        },
+        error: function(res){
+          console.log(res);
+          resolve(res)
+        }
+      })
+    }).then(function (e) {
+
+
+      that.setData({
+        loadModal: true
+      })
+      wx.request({
+        url: app.globalData.apiurl + '/api/punch/punch',
+        method: 'POST',
+        data: {
+          'busUserInfo': JSON.stringify(app.globalData.busUserInfo),
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.data.code == 0) {
+            var d = res.data.data;
+            that.setData({
+              beans: d.beans,
+              showMsg: d.showMsg,
+            })
+          } else {
+            that.setData({
+              showMsg: res.data.msg,
+            })
+          }
+          that.onloadPunchInfo()
+        },
+        error: function (res) {
           that.setData({
-            beans: d.beans,
-            showMsg: d.showMsg,
-          })
-        } else {
-          that.setData({
-            showMsg: res.data.msg,
+            showMsg: "签到失败，请稍后重试~",
           })
         }
-        that.onloadPunchInfo()
-      },
-      error: function(res) {
-        that.setData({
-          showMsg: "签到失败，请稍后重试~",
-        })
-      }
-    })
-    setTimeout(() => {
-      this.setData({
-        loadModal: false,
-        showBeans: true
       })
-    }, 6000)
+      setTimeout(() => {
+        that.setData({
+          loadModal: false,
+          showBeans: true
+        })
+      }, 3000)
+    })
+    
   },
   hideModal(e) {
     this.setData({

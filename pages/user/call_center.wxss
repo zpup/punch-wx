@@ -1,4 +1,4 @@
-/* pages/pay/goods/index.wxss */
+/* pages/user/call_center.wxss */
 .topText{
   margin-top: 25rpx;
   margin-left: 25rpx;

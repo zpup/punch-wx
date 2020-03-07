@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
+	"libVersion": "2.10.1",
 	"appid": "wxd86cb18af02c0576",
 	"projectname": "punch-wx",
 	"debugOptions": {

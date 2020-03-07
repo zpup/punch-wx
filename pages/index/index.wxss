@@ -1,1 +1,26 @@
 /* pages/main/index.wxss */
+
+.swiper_container {
+ margin-top: 0rpx;
+ margin-bottom: 20rpx;
+ padding-left: 20rpx;
+ padding-right: 5rpx;
+ height: 50rpx;
+ width: 100%;
+}
+ 
+.swiper_item {
+ font-size: 30rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}

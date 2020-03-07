@@ -1,4 +1,4 @@
-<view class="modal-box" wx:if="{{!hasUserInfo && canIUse}}" bindtap="hide">
+<view class="modal-box" wx:if="{{!hasUserInfo && canIUse}}">
   <view class="modal-body">
     <view class="modal-content">
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="width:100%;" class='cu-btn round bg-gradual-blue shadow'>登录富贵儿打卡</button>
@@ -7,7 +7,16 @@
 </view>
 <image src="/images/main/main-1.png" mode="widthFix" class="response cu-tabbar-height"></image>
 
-<uni-notice-bar style="background-color: #F0F0F0;" show-icon="true" scrollable="true" single="true" text="欢迎打卡随机收益[5-100]富贵儿豆，连续打卡收益有惊喜！！！" />
+<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="1000">
+  <block wx:for="{{msgList}}" wx:key="key">
+    <!-- <navigator url="/pages/index/index?title={{item.url}}" open-type="navigate"> -->
+    <swiper-item>
+      <view class=" cuIcon-notification swiper_item text-orange">{{item.title}}</view>
+    </swiper-item>
+    <!-- </navigator> -->
+  </block>
+</swiper>
+<!-- <uni-notice-bar style="background-color: #F0F0F0;" show-icon="true" scrollable="true" single="true" text="欢迎打卡随机收益[5-100]富贵儿豆，连续打卡收益有惊喜！！！" /> -->
 
 
 <view class="flex solid-bot tom justify-center">
@@ -38,7 +47,7 @@
 <view class="" style="padding-left: 10px;padding-right: 10px;padding-top: 20px;">
   <view class="grid solid-bottom text-center col-2 padding" style="padding-left: 0px; padding-right: 0px;">
     <view class="text-left">
-      <text class="cuIcon-title text-blue text-left"></text>今日已打卡
+      <text class="cuIcon-title text-blue text-left"></text>今日已打卡用户
     </view>
     <view class="text-right">今日打卡数：{{punchNum}}</view>
   </view>
@@ -49,7 +58,7 @@
       <view>收益</view>
     </view>
     <view class="grid solid-bottom text-center  col-3 light" style="padding-top: 8px;padding-bottom: 8px;" wx:for="{{punchList}}" wx:key="key">
-      <view class="text-center " style="color: #808080;">{{item.userId}}</view>
+      <view class="text-center " style="color: #808080;">{{item.userName}}</view>
       <view class="text-center " style="color: #808080;">{{item.showTime}}</view>
       <view class="text-center " style="color: #808080;">{{item.profit}}</view>
     </view>

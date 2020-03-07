@@ -1,0 +1,9 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">客服</view>
+</cu-custom>
+<scroll-view scroll-y class="page">
+  <view class="cuIcon-emojifill swiper_item text-black topText">  扫码添加,有专人为你服务</view>
+  <view class="swiper_item text-black topText">客服在线时间：9:00-11:30 14:00-18:00</view>
+  
+</scroll-view>

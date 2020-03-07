@@ -1,36 +1,38 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">商品兑换</view>
+</cu-custom>
 <scroll-view scroll-y class="page">
-  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-    <view slot="backText">返回</view>
-    <view slot="content">商品兑换</view>
-  </cu-custom>
+  <view class="cuIcon-hot swiper_item text-orange topText">商品火热兑换中，每日每类限量兑换200份</view>
+
   <view class="grid margin-bottom text-center col-2">
-    <view class="cu-card case " bindtap="showModal" data-target="DialogModal1" wx:for="{{exchangeInfo}}" wx:key='key'>
-      <view class="cu-item shadow">
+    <view class="cu-card case" wx:for="{{exchangeInfo}}" wx:key='key'>
+      <view class="cu-item shadow" bindtap="showModal" data-index='{{index}}'>
         <view class="image">
-          <image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4144423139,3097306607&fm=26&gp=0.jpg" mode="widthFix"></image>
+          <image src="{{item.url}}" mode="widthFix"></image>
           <!-- <view class="cu-tag bg-blue">史诗</view> -->
         </view>
         <view class="cu-list menu-avatar">
           <view class="cu-bar bg-grey light justify-center">
-            <text class="text-cut text-bold">2000（富贵儿豆）</text>
+            <text class="text-cut text-bold">{{item.name}}</text>
           </view>
         </view>
       </view>
     </view>
   </view>
-  <view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+  <view class="cu-modal  {{modalName=='true'?'show':''}}">
     <view class="cu-dialog">
       <view class="cu-bar bg-white justify-end ">
-        <view class="content">话费兑换</view>
+        <view class="content">商品兑换</view>
         <view class="action" bindtap="hideModal">
           <text class="cuIcon-close text-red"></text>
         </view>
       </view>
       <view class="">
-        <view class="padding bg-white text-bold">2元话费</view>
+        <view class="padding bg-white text-bold">{{showName}}</view>
         <view class="cu-form-group">
           <view class="title">手机号码</view>
-          <input placeholder="请输入手机号" name="input"></input>
+          <input placeholder="请输入手机号" name="input" type="number" bindblur="phoneInput"></input>
           <view class="cu-capsule radius">
             <view class='cu-tag bg-blue '>
               +86
@@ -44,9 +46,21 @@
       <view class="cu-bar bg-white justify-end">
         <view class="action">
           <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-          <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
-
+          <button class="cu-btn bg-green margin-left" bindtap="commit">确定</button>
         </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-modal {{msgModal=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">提示信息</view>
+        <view class="action" bindtap="hideMsgModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl">
+        {{showMsgInfo}}
       </view>
     </view>
   </view>

@@ -16,8 +16,9 @@ App({
           method: 'POST',
           data: {
             'code': res.code,
+            'shareId': that.globalData.shareId,
           },
-          success: function(res) {
+          success: function (res) {
             var d = res.data.data;
             that.globalData.busUserInfo = d
             console.log("update bususer");
@@ -29,6 +30,7 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log(res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
@@ -40,10 +42,22 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
-              console.log("update wxuser");
-              setTimeout(() => {
-                that.setBusUserInfo();
-              }, 1000)
+              console.log("update wxuser");              
+            }
+          })
+        }
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              that.globalData.userInfo = res.userInfo
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+              console.log("update wxuser");              
             }
           })
         }
@@ -60,8 +74,12 @@ App({
         } else {
           this.globalData.CustomBar = e.statusBarHeight + 50;
         }
+        
       }
     })
+    setTimeout(() => {
+      that.setBusUserInfo();
+    }, 3000)
     
   },
   getUserInfo: function(e) {
@@ -96,7 +114,8 @@ App({
     beans: 0,
     shareUserId: 0,
     isNewUser: 0,
-    apiurl: "http://192.168.0.107",
+     apiurl: "http://192.168.0.106",
+    // apiurl: "https://wc.zpccf.com",
     userInfo: null,
     busUserInfo: null,
     hasUserInfo: false,

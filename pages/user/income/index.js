@@ -8,6 +8,7 @@ Page({
    */
   data: {
     beansMap: null,
+    CustomBar: app.globalData.CustomBar,
   },
 
   /**

@@ -1,8 +1,8 @@
-<scroll-view>
   <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
     <view slot="backText">返回</view>
     <view slot="content">收益明细</view>
   </cu-custom>
+<scroll-view>
   <view class="cu-timeline" wx:for='{{beansMap}}' wx:key='key'>
     <view class="cu-time" wx:for='{{item}}' wx:for-index='itemkey'>{{itemkey}}</view>
     <view class="cu-timeline" wx:for='{{item}}' wx:for-index='itemkey'>

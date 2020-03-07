@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    CustomBar: app.globalData.CustomBar,
     beans:0,
     userInfo: {},
     hasUserInfo: false,

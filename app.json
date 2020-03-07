@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/main/index",
     "pages/user/home/index",
     "pages/user/income/index",
-    "pages/pay/goods/index"
+    "pages/pay/goods/index",
+    "pages/user/call_center"
   ],
   "tabBar": {
     "color": "#7A7E83",
