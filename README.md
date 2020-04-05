@@ -3,6 +3,10 @@ punch wechat code
 
 ### 微信小程序前端
 
+预览地址
+![navia](https://github.com/zpup/punch-wx/blob/master/images/gh_1dfbfa2adcfe_430.jpg)
+
+
 基于原生框架 + color ui
 
 
@@ -15,4 +19,5 @@ punch wechat code
 如需商用，请联系我！！！
 
 
+![navia](https://github.com/zpup/punch-wx/blob/master/images/WechatIMG137.jpeg)
 感谢 color ui
