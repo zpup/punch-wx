@@ -3,6 +3,10 @@ punch wechat code
 
 ### 微信小程序前端
 
+签到送积分，兑换话费。
+2020 0406 增加幸运抽奖。
+
+
 预览地址
 ![navia](https://github.com/zpup/punch-wx/blob/master/images/gh_1dfbfa2adcfe_430.jpg)
 
